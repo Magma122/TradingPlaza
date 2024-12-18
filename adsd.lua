@@ -9,11 +9,11 @@ queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus 
 
 if syn and syn.queue_on_teleport then
     syn.queue_on_teleport([[
-        loadstring(game:HttpGet("https://your-script-url.com/script.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/adsd.lua?token=GHSAT0AAAAAAC4DGBW3KJQWJAIP6IPCGIDWZ3DACFA"))()
     ]])
 elseif queue_on_teleport then
     queue_on_teleport([[
-        loadstring(game:HttpGet("https://your-script-url.com/script.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/adsd.lua?token=GHSAT0AAAAAAC4DGBW3KJQWJAIP6IPCGIDWZ3DACFA"))()
     ]])
 end
 
@@ -90,6 +90,9 @@ for _, booth in pairs(booths:GetChildren()) do
     end
 end    
 
+local textik = readfile("blackList.txt")
+
+writefile("blackList.txt", textik .. blackList .. "\n")
 
 local args = {
     [1] = "Consumable",
@@ -99,6 +102,7 @@ local args = {
 
 while true do
     local result = game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("TradingTerminal_Search"):InvokeServer(unpack(args))
+    
 
     if result and result.place_id and result.job_id then
         pcall(function()
