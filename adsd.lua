@@ -46,7 +46,7 @@ while #booths:GetChildren() == 0 or #booths:GetChildren() ~= pets do
     print(#booths:GetChildren(), pets)
 end
    
-
+local blackList = ""
 for _, booth in pairs(booths:GetChildren()) do
     if booth and booth:FindFirstChild("Pets") then
         for _, item in pairs(booth.Pets.BoothTop.PetScroll:GetChildren()) do
@@ -80,7 +80,8 @@ for _, booth in pairs(booths:GetChildren()) do
                         buy[2][item.Name] = math.floor(haveDiamonds / (quantity*cost))
                     end
                     pcall(game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Booths_RequestPurchase"):InvokeServer(unpack(buy)))
-    
+                else
+                    blackList += booth:GetAttribute("Owner")
                 end
                 wait(0.5)
                 itemCost:Destroy()
