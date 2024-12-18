@@ -5,6 +5,7 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
     notLoaded:Destroy()
 end
+
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
 if syn and syn.queue_on_teleport then
@@ -26,7 +27,6 @@ function convertToNumber(text)
     if multiplier > 1 then
         text = text:sub(1, -2)
     end
-
     return tonumber(text) * multiplier
 end
 
