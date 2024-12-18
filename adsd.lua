@@ -9,11 +9,11 @@ queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus 
 
 if syn and syn.queue_on_teleport then
     syn.queue_on_teleport([[
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/adsd.lua?token=GHSAT0AAAAAAC4DGBW3KJQWJAIP6IPCGIDWZ3DACFA"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/adsd.lua"))()
     ]])
 elseif queue_on_teleport then
     queue_on_teleport([[
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/adsd.lua?token=GHSAT0AAAAAAC4DGBW3KJQWJAIP6IPCGIDWZ3DACFA"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/adsd.lua"))()
     ]])
 end
 
@@ -81,7 +81,7 @@ for _, booth in pairs(booths:GetChildren()) do
                     end
                     pcall(game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Booths_RequestPurchase"):InvokeServer(unpack(buy)))
                 else
-                    blackList += booth:GetAttribute("Owner")
+                    blackList = blackList .. booth:GetAttribute("Owner") .. "\n"
                 end
                 wait(0.5)
                 itemCost:Destroy()
@@ -93,7 +93,7 @@ end
 
 local textik = readfile("blackList.txt")
 
-writefile("blackList.txt", textik .. blackList .. "\n")
+writefile("blackList.txt", textik .. blackList)
 
 local args = {
     [1] = "Consumable",
