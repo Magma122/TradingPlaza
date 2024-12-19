@@ -95,7 +95,7 @@ local textik = readfile("blackList.txt")
 
 writefile("blackList.txt", textik .. blackList)
 
-local args = {
+local args = { 
     [1] = "Consumable",
     [2] = "{\"id\":\"Fishing Bait\",\"tn\":5}",
     [4] = false
@@ -103,11 +103,20 @@ local args = {
 
 while true do
     local result = game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("TradingTerminal_Search"):InvokeServer(unpack(args))
-    
 
-    if result and result.place_id and result.job_id then
+    local textik = readfile("blackList.txt")
+    local lines = string.split(textik, "\n")
+    local blackList = false
+
+    for i, line in ipairs(lines) do
+        if result["user_id"]  then
+            blackList =  true
+            break
+        end
+    end
+    if not blackList then
         pcall(function()
-            return game:GetService("TeleportService"):TeleportToPlaceInstance(result["place_id"], result["job_id"], game.Players.LocalPlayer)
+        return game:GetService("TeleportService"):TeleportToPlaceInstance(result["place_id"], result["job_id"], game.Players.LocalPlayer)
         end)
         wait(1)
     end
