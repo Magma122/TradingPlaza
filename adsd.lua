@@ -46,7 +46,7 @@ while #booths:GetChildren() == 0 or #booths:GetChildren() ~= pets do
     print(#booths:GetChildren(), pets)
 end
    
-local blackList = ""
+local blackList = readfile("blackList.txt")
 for _, booth in pairs(booths:GetChildren()) do
     if booth and booth:FindFirstChild("Pets") then
         for _, item in pairs(booth.Pets.BoothTop.PetScroll:GetChildren()) do
@@ -91,9 +91,7 @@ for _, booth in pairs(booths:GetChildren()) do
     end
 end    
 
-local textik = readfile("blackList.txt")
-
-writefile("blackList.txt", textik .. blackList)
+writefile("blackList.txt", blackList)
 
 local args = { 
     [1] = "Consumable",
@@ -109,8 +107,9 @@ while true do
     local blackList = false
 
     for i, line in ipairs(lines) do
-        if result["user_id"]  then
+        if result["user_id"] == line then
             blackList =  true
+            break
         end
     end
     if not blackList then
