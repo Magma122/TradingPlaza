@@ -111,7 +111,6 @@ while true do
     for i, line in ipairs(lines) do
         if result["user_id"]  then
             blackList =  true
-            break
         end
     end
     if not blackList then
