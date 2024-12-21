@@ -18,7 +18,7 @@ elseif queue_on_teleport then
     ]])
 end
 
-local bestPrice = 2000
+local bestPrice = 3100
 
 function convertToNumber(text)
     local multipliers = {b= 1000000000, m = 1000000, k = 1000}
