@@ -107,7 +107,7 @@ while true do
     local blackList = false
 
     for i, line in ipairs(lines) do
-        if result["user_id"] == line then
+        if result["user_id"] and result["user_id"] == line then
             blackList =  true
             break
         end
