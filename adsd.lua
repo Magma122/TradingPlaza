@@ -105,17 +105,16 @@ while true do
     local textik = readfile("blackList.txt")
     local lines = string.split(textik, "\n")
     local blackList = false
-
-    for i, line in ipairs(lines) do
-        if result["user_id"] ~= nil and result["user_id"] == line then
-            blackList =  true
-            break
+    pcall(function()
+        for i, line in ipairs(lines) do
+            if result["user_id"] ~= nil and result["user_id"] == line then
+                blackList =  true
+                break
+            end
         end
-    end
-    if not blackList then
-        pcall(function()
-        return game:GetService("TeleportService"):TeleportToPlaceInstance(result["place_id"], result["job_id"], game.Players.LocalPlayer)
-        end)
-        wait(1)
-    end
+        if not blackList then
+            return game:GetService("TeleportService"):TeleportToPlaceInstance(result["place_id"], result["job_id"], game.Players.LocalPlayer)
+        end    
+    end)
+    wait(1)
 end
