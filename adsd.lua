@@ -18,8 +18,15 @@ elseif queue_on_teleport then
     ]])
 end
 
-local bestPrice = 2500
+-- List
 
+local list = {
+    ["{\"id\":\"Fishing Bait\",\"tn\":5}"] = "rbxassetid://112224184101102",
+    ["{\"id\":\"Crystal Key Lower Half\"}"] = "rbxassetid://15000810798",
+    ["{\"id\":\"Crystal Key Upper Half\"}"] = "rbxassetid://15000810636"
+}
+
+-- Convert To Number
 function convertToNumber(text)
     local multipliers = {b= 1000000000, m = 1000000, k = 1000}
     local multiplier = multipliers[text:sub(-1)] or 1
@@ -30,6 +37,7 @@ function convertToNumber(text)
     return tonumber(text) * multiplier
 end
 
+-- Load All Booths
 local booths = game:GetService("Workspace"):WaitForChild("__THINGS"):WaitForChild("Booths")
 local pets = 0
 while #booths:GetChildren() == 0 or #booths:GetChildren() ~= pets do
@@ -45,25 +53,47 @@ while #booths:GetChildren() == 0 or #booths:GetChildren() ~= pets do
     end 
     print(#booths:GetChildren(), pets)
 end
-   
+
+local function BestPrice()
+    local module = require(game:GetService("ReplicatedStorage").Library.Client.RAPCmds)
+
+
+    local args
+    args = {
+        Class = { Name = "Misc" },
+        StackKey = function(self)
+            return "{\"id\":\"Crystal Key Lower Half\"}"
+        end,
+        AbstractGetRAP = function()
+            -- Реализуйте ожидаемую логику
+            return nil -- Пример значения
+        end
+    }
+    print(module.Get(args))
+end
+
+-- Buy All item
 local blackList = readfile("blackList.txt")
 for _, booth in pairs(booths:GetChildren()) do
     if booth and booth:FindFirstChild("Pets") then
         for _, item in pairs(booth.Pets.BoothTop.PetScroll:GetChildren()) do
             if (#item:GetChildren() > 0) and (item.Holder.ItemSlot.Icon.Image == "rbxassetid://112224184101102")then
                 local cost = convertToNumber(item.Buy.Cost.Text)
-                --print(cost)
+
                 local itemCost = Instance.new("Message")
                 itemCost.Parent = game:GetService("CoreGui")
                 itemCost.Text = item.Buy.Cost.Text
     
                 local screenGui = Instance.new("ScreenGui")
                 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    
                 local icon = item.Holder.ItemSlot.Icon:Clone()
                 icon.Position = UDim2.new(0.5, -100, 0.5, -50)
                 icon.Parent = screenGui
-                
+
+                -- B
+                local bestPrice = BestPrice()
+
+
                 if cost <= bestPrice then
                     local haveDiamonds = convertToNumber(game:GetService("Players").LocalPlayer.PlayerGui.Main.Left["Diamonds Desktop"].Amount.text)
                     local quantity = tonumber(item.Holder.ItemSlot:GetAttribute("Quantity"))
@@ -95,7 +125,7 @@ writefile("blackList.txt", blackList)
 
 local args = { 
     [1] = "Consumable",
-    [2] = "{\"id\":\"Corrupted Huge Bait\",\"tn\":1}",
+    [2] = "{\"id\":\"Fishing Bait\",\"tn\":5}",
     [4] = false
 }
 
