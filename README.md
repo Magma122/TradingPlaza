@@ -1,3 +1,8 @@
 # PetsGO
+local args = {
+    [1] = "Consumable",
+    [2] = "{\"id\":\"Corrupted Huge Bait\",\"tn\":1}",
+    [4] = false
+}
 
-workspace.TRADING.INTERACT.TradingTerminal["TradingTerminal _Machine"].Screens.Screen_1.SurfaceGui.Frame.ScrollingFrame
+game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("TradingTerminal_Search"):InvokeServer(unpack(args))
