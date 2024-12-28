@@ -18,7 +18,7 @@ elseif queue_on_teleport then
     ]])
 end
 
-local bestPrice = 3000
+local bestPrice = 2500
 
 function convertToNumber(text)
     local multipliers = {b= 1000000000, m = 1000000, k = 1000}
@@ -50,7 +50,7 @@ local blackList = readfile("blackList.txt")
 for _, booth in pairs(booths:GetChildren()) do
     if booth and booth:FindFirstChild("Pets") then
         for _, item in pairs(booth.Pets.BoothTop.PetScroll:GetChildren()) do
-            if (#item:GetChildren() > 0) and (item.Holder.ItemSlot.Icon.Image == "rbxassetid://80593297003100")then
+            if (#item:GetChildren() > 0) and (item.Holder.ItemSlot.Icon.Image == "rbxassetid://112224184101102")then
                 local cost = convertToNumber(item.Buy.Cost.Text)
                 --print(cost)
                 local itemCost = Instance.new("Message")
