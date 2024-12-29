@@ -18,25 +18,6 @@ elseif queue_on_teleport then
     ]])
 end
 
--- List
-
-local list = {
-    ["{\"id\":\"Fishing Bait\",\"tn\":5}"] = "rbxassetid://112224184101102",
-    ["{\"id\":\"Crystal Key Lower Half\"}"] = "rbxassetid://15000810798",
-    ["{\"id\":\"Crystal Key Upper Half\"}"] = "rbxassetid://15000810636"
-}
-
--- Convert To Number
-function convertToNumber(text)
-    local multipliers = {b= 1000000000, m = 1000000, k = 1000}
-    local multiplier = multipliers[text:sub(-1)] or 1
-
-    if multiplier > 1 then
-        text = text:sub(1, -2)
-    end
-    return tonumber(text) * multiplier
-end
-
 -- Load All Booths
 local booths = game:GetService("Workspace"):WaitForChild("__THINGS"):WaitForChild("Booths")
 local pets = 0
@@ -51,74 +32,93 @@ while #booths:GetChildren() == 0 or #booths:GetChildren() ~= pets do
             print(#booth:WaitForChild("Pets"):WaitForChild("BoothTop"):WaitForChild("PetScroll"):GetChildren())
         end
     end 
-    print(#booths:GetChildren(), pets)
+    -- print(#booths:GetChildren(), pets)
 end
 
-local function BestPrice()
+-- List
+local shoppingList = {
+    ["{\"id\":\"Fishing Bait\",\"tn\":5}"] = {
+        Image = "rbxassetid://112224184101102",
+        ClassName = "Consumable"
+    },    
+    ["{\"id\":\"Crystal Key Lower Half\"}"] = {
+        Image = "rbxassetid://15000810798",
+        ClassName = "Misc"
+    },
+    ["{\"id\":\"Crystal Key Upper Half\"}"] = {
+        Image = "rbxassetid://15000810636",
+        ClassName = "Misc"
+    },
+}
+
+-- Best Price
+function BestPrice(ClassName, StackKey)
     local module = require(game:GetService("ReplicatedStorage").Library.Client.RAPCmds)
-
-
     local args
     args = {
-        Class = { Name = "Misc" },
-        StackKey = function(self)
-            return "{\"id\":\"Crystal Key Lower Half\"}"
+        Class = { Name = ClassName },
+        StackKey = function()
+            return StackKey
         end,
         AbstractGetRAP = function()
-            -- Реализуйте ожидаемую логику
-            return nil -- Пример значения
+            return nil
         end
     }
-    print(module.Get(args))
+    local Rap = module.Get(args)
+    return Rap
+end
+
+-- Convert To Number
+function convertToNumber(text)
+    local multipliers = {b= 1000000000, m = 1000000, k = 1000}
+    local multiplier = multipliers[text:sub(-1)] or 1
+
+    if multiplier > 1 then
+        text = text:sub(1, -2)
+    end
+    return tonumber(text) * multiplier
+end
+
+-- Buy item
+function BuyItem(item, booth, cost)
+    local haveDiamonds = convertToNumber(game:GetService("Players").LocalPlayer.PlayerGui.Main.Left["Diamonds Desktop"].Amount.text)
+    local quantity = tonumber(item.Holder.ItemSlot:GetAttribute("Quantity"))
+    local buy = {
+        [1] = booth:GetAttribute("Owner"),
+        [2] = {
+            [item.Name] = 1
+        }
+    }
+    if haveDiamonds / (quantity*cost) >= quantity then
+        buy[2][item.Name] = quantity
+    else
+        buy[2][item.Name] = math.floor(haveDiamonds / (quantity*cost))
+    end
+    pcall(game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Booths_RequestPurchase"):InvokeServer(unpack(buy)))
 end
 
 -- Buy All item
 local blackList = readfile("blackList.txt")
 for _, booth in pairs(booths:GetChildren()) do
-    if booth and booth:FindFirstChild("Pets") then
-        for _, item in pairs(booth.Pets.BoothTop.PetScroll:GetChildren()) do
-            if (#item:GetChildren() > 0) and (item.Holder.ItemSlot.Icon.Image == "rbxassetid://112224184101102")then
-                local cost = convertToNumber(item.Buy.Cost.Text)
-
+    for _, item in pairs(booth.Pets.BoothTop.PetScroll:GetChildren()) do
+        for i, n in shoppingList do
+            if item.Holder.ItemSlot.Icon.Image == n.Image then
                 local itemCost = Instance.new("Message")
                 itemCost.Parent = game:GetService("CoreGui")
                 itemCost.Text = item.Buy.Cost.Text
-    
-                local screenGui = Instance.new("ScreenGui")
-                screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-                local icon = item.Holder.ItemSlot.Icon:Clone()
-                icon.Position = UDim2.new(0.5, -100, 0.5, -50)
-                icon.Parent = screenGui
 
-                -- B
-                local bestPrice = BestPrice()
-
-
+                local cost = convertToNumber(item.Buy.Cost.Text)
+                local bestPrice = BestPrice(n.ClassName, i)
                 if cost <= bestPrice then
-                    local haveDiamonds = convertToNumber(game:GetService("Players").LocalPlayer.PlayerGui.Main.Left["Diamonds Desktop"].Amount.text)
-                    local quantity = tonumber(item.Holder.ItemSlot:GetAttribute("Quantity"))
-                    local buy = {
-                        [1] = booth:GetAttribute("Owner"),
-                        [2] = {
-                            [item.Name] = 1
-                        }
-                    }
-                    
-                    if haveDiamonds / (quantity*cost) >= quantity then
-                        buy[2][item.Name] = quantity
-                    else
-                        buy[2][item.Name] = math.floor(haveDiamonds / (quantity*cost))
-                    end
-                    pcall(game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Booths_RequestPurchase"):InvokeServer(unpack(buy)))
+                    BuyItem(item, booth, cost)
                 else
                     blackList = blackList .. booth:GetAttribute("Owner") .. "\n"
                 end
                 wait(0.5)
                 itemCost:Destroy()
-                icon:Destroy()
             end
-        end         
-    end
+        end
+    end         
 end    
 
 writefile("blackList.txt", blackList)
