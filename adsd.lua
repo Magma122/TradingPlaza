@@ -68,6 +68,7 @@ function BestPrice(ClassName, StackKey)
     if Rap ~= nil then
         return Rap
     else
+        wait(0.1)
         return BestPrice(ClassName, StackKey)
     end
     
