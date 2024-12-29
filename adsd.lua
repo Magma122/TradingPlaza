@@ -65,7 +65,12 @@ function BestPrice(ClassName, StackKey)
         end
     }
     local Rap = module.Get(args)
-    return Rap
+    if Rap ~= nil then
+        return Rap
+    else
+        return BestPrice(ClassName, StackKey)
+    end
+    
 end
 
 -- Convert To Number
@@ -111,6 +116,7 @@ for _, booth in pairs(booths:GetChildren()) do
         
                         local cost = convertToNumber(item.Buy.Cost.Text)
                         local bestPrice = BestPrice(n.ClassName, i)
+                        bestPrice = bestPrice - (bestPrice * 0.2)
                         if cost <= bestPrice then
                             BuyItem(item, booth, cost)
                         else
