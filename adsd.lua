@@ -101,22 +101,24 @@ end
 local blackList = readfile("blackList.txt")
 for _, booth in pairs(booths:GetChildren()) do
     for _, item in pairs(booth.Pets.BoothTop.PetScroll:GetChildren()) do
-        for i, n in shoppingList do
-            if #item:GetChildren() > 0 and item.Holder.ItemSlot.Icon.Image == n.Image then
-                local itemCost = Instance.new("Message")
-                itemCost.Parent = game:GetService("CoreGui")
-                itemCost.Text = item.Buy.Cost.Text
-
-                local cost = convertToNumber(item.Buy.Cost.Text)
-                local bestPrice = BestPrice(n.ClassName, i)
-                if cost <= bestPrice then
-                    BuyItem(item, booth, cost)
-                else
-                    blackList = blackList .. booth:GetAttribute("Owner") .. "\n"
+        if #item:GetChildren() > 0 then
+            for i, n in shoppingList do
+                if item.Holder.ItemSlot.Icon.Image == n.Image then
+                    local itemCost = Instance.new("Message")
+                    itemCost.Parent = game:GetService("CoreGui")
+                    itemCost.Text = item.Buy.Cost.Text
+    
+                    local cost = convertToNumber(item.Buy.Cost.Text)
+                    local bestPrice = BestPrice(n.ClassName, i)
+                    if cost <= bestPrice then
+                        BuyItem(item, booth, cost)
+                    else
+                        blackList = blackList .. booth:GetAttribute("Owner") .. "\n"
+                    end
+                    wait(0.5)
+                    itemCost:Destroy()
                 end
-                wait(0.5)
-                itemCost:Destroy()
-            end
+            end    
         end
     end         
 end    
