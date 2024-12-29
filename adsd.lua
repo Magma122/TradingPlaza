@@ -104,7 +104,7 @@ for _, booth in pairs(booths:GetChildren()) do
         for _, item in pairs(booth.Pets.BoothTop.PetScroll:GetChildren()) do
             if #item:GetChildren() > 0 then
                 for i, n in shoppingList do
-                    if item.Holder.ItemSlot.Icon.Image == n.Image then
+                    if #item:GetChildren() > 0 and item.Holder.ItemSlot.Icon.Image == n.Image then
                         local itemCost = Instance.new("Message")
                         itemCost.Parent = game:GetService("CoreGui")
                         itemCost.Text = item.Buy.Cost.Text
