@@ -29,10 +29,8 @@ while #booths:GetChildren() == 0 or #booths:GetChildren() ~= pets do
         if booth:FindFirstChild("Pets"):FindFirstChild("BoothTop"):FindFirstChild("PetScroll") 
         and #booth:WaitForChild("Pets"):WaitForChild("BoothTop"):WaitForChild("PetScroll"):GetChildren() >= 2 then
             pets += 1
-            print(#booth:WaitForChild("Pets"):WaitForChild("BoothTop"):WaitForChild("PetScroll"):GetChildren())
         end
-    end 
-    -- print(#booths:GetChildren(), pets)
+    end
 end
 
 -- List
@@ -123,7 +121,7 @@ for _, booth in pairs(booths:GetChildren()) do
                         else
                             blackList = blackList .. booth:GetAttribute("Owner") .. "\n"
                         end
-                        wait(0.5)
+                        wait(0.1)
                         itemCost:Destroy()
                     end
                 end
