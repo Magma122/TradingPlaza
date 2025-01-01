@@ -111,7 +111,7 @@ for _, booth in pairs(booths:GetChildren()) do
                     if #item:GetChildren() > 0 and item.Holder.ItemSlot.Icon.Image == n.Image then
                         local itemCost = Instance.new("Message")
                         itemCost.Parent = game:GetService("CoreGui")
-                        itemCost.Text = item.Buy.Cost.Text .. "\n" .. i
+                        itemCost.Text = item.Buy.Cost.Text .. i
         
                         local cost = convertToNumber(item.Buy.Cost.Text)
                         local bestPrice = BestPrice(n.ClassName, i)
