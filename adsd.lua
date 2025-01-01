@@ -53,7 +53,7 @@ local shoppingList = {
 
 -- Best Price
 function BestPrice(ClassName, StackKey)
-    local module = require(game:GetService("ReplicatedStorage").Library.Client.RAPCmds)
+    local module = require(game:GetService("ReplicatedStorage"):WaitForChild("Library"):WaitForChild("Client"):WaitForChild("RAPCmds"))
     local args
     args = {
         Class = { Name = ClassName },
