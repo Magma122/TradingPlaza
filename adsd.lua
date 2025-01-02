@@ -86,12 +86,12 @@ for _, booth in pairs(booths:GetChildren()) do
         for _, item in pairs(booth:WaitForChild("Pets"):WaitForChild("BoothTop"):WaitForChild("PetScroll"):GetChildren()) do
             if #item:GetChildren() > 0 then
                 for i, n in shoppingList do
-                    if #item:GetChildren() > 0 and item:WaitForChild("Holder"):WaitForChild("ItemSlot"):WaitForChild("Icon"):WaitForChild("Image") == n.Image then
+                    if #item:GetChildren() > 0 and item:WaitForChild("Holder"):WaitForChild("ItemSlot"):WaitForChild("Icon").Image == n.Image then
                         local itemCost = Instance.new("Message")
                         itemCost.Parent = game:GetService("CoreGui")
-                        itemCost.Text = item:WaitForChild("Buy"):WaitForChild("Cost"):WaitForChild("Text") .. i
+                        itemCost.Text = item:WaitForChild("Buy"):WaitForChild("Cost").Text .. i
         
-                        local cost = convertToNumber(item:WaitForChild("Buy"):WaitForChild("Cost"):WaitForChild("Text"))
+                        local cost = convertToNumber(item:WaitForChild("Buy"):WaitForChild("Cost").Text)
                         local bestPrices = readfile("bestPrice.txt")
                         local bestPrice = 1000
                         for _, line in ipairs(string.split(bestPrice, "\n")) do
