@@ -49,29 +49,6 @@ local shoppingList = {
     },
 }
 
--- Best Price
-function BestPrice(ClassName, StackKey)
-    local module = require(game:GetService("ReplicatedStorage"):WaitForChild("Library"):WaitForChild("Client"):WaitForChild("RAPCmds"))
-    local args
-    args = {
-        Class = { Name = ClassName },
-        StackKey = function()
-            return StackKey
-        end,
-        AbstractGetRAP = function()
-            return nil
-        end
-    }
-    local Rap = module.Get(args)
-    if Rap ~= nil then
-        return Rap
-    else
-        wait(0.1)
-        return BestPrice(ClassName, StackKey)
-    end
-    
-end
-
 -- Convert To Number
 function convertToNumber(text)
     local multipliers = {b= 1000000000, m = 1000000, k = 1000}
@@ -84,11 +61,11 @@ function convertToNumber(text)
 end
 
 -- Buy item
-function BuyItem(item, booth, cost)
+function BuyItem(item, owner, cost)
     local haveDiamonds = convertToNumber(game:GetService("Players").LocalPlayer.PlayerGui.Main.Left["Diamonds Desktop"].Amount.text)
     local quantity = tonumber(item.Holder.ItemSlot:GetAttribute("Quantity"))
     local buy = {
-        [1] = booth:GetAttribute("Owner"),
+        [1] = owner,
         [2] = {
             [item.Name] = 1
         }
@@ -105,21 +82,30 @@ end
 local blackList = readfile("blackList.txt")
 for _, booth in pairs(booths:GetChildren()) do
     if booth and booth:FindFirstChild("Pets") then
-        for _, item in pairs(booth.Pets.BoothTop.PetScroll:GetChildren()) do
+        local owner = booth:GetAttribute("Owner")
+        for _, item in pairs(booth:WaitForChild("Pets"):WaitForChild("BoothTop"):WaitForChild("PetScroll"):GetChildren()) do
             if #item:GetChildren() > 0 then
                 for i, n in shoppingList do
-                    if #item:GetChildren() > 0 and item.Holder.ItemSlot.Icon.Image == n.Image then
+                    if #item:GetChildren() > 0 and item:WaitForChild("Holder"):WaitForChild("ItemSlot"):WaitForChild("Icon"):WaitForChild("Image") == n.Image then
                         local itemCost = Instance.new("Message")
                         itemCost.Parent = game:GetService("CoreGui")
-                        itemCost.Text = item.Buy.Cost.Text .. i
+                        itemCost.Text = item:WaitForChild("Buy"):WaitForChild("Cost"):WaitForChild("Text") .. i
         
-                        local cost = convertToNumber(item.Buy.Cost.Text)
-                        local bestPrice = BestPrice(n.ClassName, i)
-                        bestPrice = bestPrice - (bestPrice * 0.2)
+                        local cost = convertToNumber(item:WaitForChild("Buy"):WaitForChild("Cost"):WaitForChild("Text"))
+                        local bestPrices = readfile("bestPrice.txt")
+                        local bestPrice = 1000
+                        for _, line in ipairs(string.split(bestPrice, "\n")) do
+                            local jsonPart, pricePart = line:match("^(%{.*%})%s+(%d+)$")
+                            if i ~= jsonPart then
+                                bestPrice =  pricePart
+                                break
+                            end
+                        end
+
                         if cost <= bestPrice then
-                            BuyItem(item, booth, cost)
+                            BuyItem(item, owner, cost)
                         else
-                            blackList = blackList .. booth:GetAttribute("Owner") .. "\n"
+                            blackList = blackList .. owner .. "\n"
                         end
                         wait(0.1)
                         itemCost:Destroy()
@@ -141,8 +127,7 @@ local args = {
 while true do
     local result = game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("TradingTerminal_Search"):InvokeServer(unpack(args))
 
-    local textik = readfile("blackList.txt")
-    local lines = string.split(textik, "\n")
+    local lines = string.split(readfile("blackList.txt"), "\n")
     local blackList = false
     pcall(function()
         for i, line in ipairs(lines) do
@@ -153,7 +138,7 @@ while true do
         end
         if not blackList then
             return game:GetService("TeleportService"):TeleportToPlaceInstance(result["place_id"], result["job_id"], game.Players.LocalPlayer)
-        end    
+        end
     end)
     wait(1)
 end

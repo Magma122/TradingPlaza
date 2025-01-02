@@ -37,7 +37,11 @@ local shoppingList = {
     },
 }
 
+local lines = readfile("bestPrice.txt")
 for i, n in shoppingList do
     local bestPrice = BestPrice(n.ClassName, i)
     bestPrice = bestPrice - (bestPrice * 0.2)
+    lines = lines .. i .. " " .. tostring(bestPrice) .. "\n"
 end
+
+writefile("bestPrice.txt", lines)
