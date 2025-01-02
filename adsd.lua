@@ -92,9 +92,10 @@ for _, booth in pairs(booths:GetChildren()) do
                         itemCost.Text = item:WaitForChild("Buy"):WaitForChild("Cost").Text .. i
         
                         local cost = convertToNumber(item:WaitForChild("Buy"):WaitForChild("Cost").Text)
-                        local bestPrices = readfile("bestPrice.txt")
                         local bestPrice = 1000
-                        for _, line in ipairs(string.split(bestPrice, "\n")) do
+                        local prices = readfile("bestPrice.txt")
+
+                        for _, line in ipairs(string.split(prices, "\n")) do
                             local jsonPart, pricePart = line:match("^(%{.*%})%s+(%d+)$")
                             if i ~= jsonPart then
                                 bestPrice = tonumber(pricePart)
