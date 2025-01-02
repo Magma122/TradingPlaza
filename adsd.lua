@@ -97,7 +97,7 @@ for _, booth in pairs(booths:GetChildren()) do
                         for _, line in ipairs(string.split(bestPrice, "\n")) do
                             local jsonPart, pricePart = line:match("^(%{.*%})%s+(%d+)$")
                             if i ~= jsonPart then
-                                bestPrice =  pricePart
+                                bestPrice = tonumber(pricePart)
                                 break
                             end
                         end
