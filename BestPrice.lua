@@ -18,7 +18,6 @@ function BestPrice(ClassName, StackKey)
         wait(0.1)
         return BestPrice(ClassName, StackKey)
     end
-    
 end
 
 -- List
@@ -34,7 +33,7 @@ local shoppingList = {
     ["{\"id\":\"Crystal Key Upper Half\"}"] = {
         Image = "rbxassetid://15000810636",
         ClassName = "Misc"
-    },
+    }
 }
 
 local lines = readfile("bestPrice.txt")

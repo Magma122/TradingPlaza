@@ -22,7 +22,7 @@ end
 local booths = game:GetService("Workspace"):WaitForChild("__THINGS"):WaitForChild("Booths")
 local pets = 0
 while #booths:GetChildren() == 0 or #booths:GetChildren() ~= pets do
-    wait(0.1)  
+    wait(1)  
     booths = game:GetService("Workspace"):WaitForChild("__THINGS"):WaitForChild("Booths")
     pets = 0
     for _, booth in pairs(booths:GetChildren()) do
@@ -32,6 +32,7 @@ while #booths:GetChildren() == 0 or #booths:GetChildren() ~= pets do
         end
     end
 end
+wait(5) -- Load ALL
 
 -- List
 local shoppingList = {
@@ -46,7 +47,7 @@ local shoppingList = {
     ["{\"id\":\"Crystal Key Upper Half\"}"] = {
         Image = "rbxassetid://15000810636",
         ClassName = "Misc"
-    },
+    }
 }
 
 -- Convert To Number
