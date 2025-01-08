@@ -105,8 +105,8 @@ for _, booth in pairs(booths:GetChildren()) do
                         end
 
                         if cost <= bestPrice then
-                            print(item, owner, cost)
                             BuyItem(item, owner, cost)
+                            wait(1)
                         else
                             blackList = blackList .. owner .. "\n"
                         end
