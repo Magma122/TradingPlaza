@@ -105,7 +105,7 @@ for _, booth in pairs(booths:GetChildren()) do
                         end
 
                         if cost <= bestPrice then
-                            BuyItem(item, owner, cost)
+                            pcall(BuyItem(item, owner, cost))
                         else
                             blackList = blackList .. owner .. "\n"
                         end
