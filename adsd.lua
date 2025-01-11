@@ -35,20 +35,8 @@ end
 wait(5) -- Load ALL
 
 -- List
-local shoppingList = {
-    ["{\"id\":\"Fishing Bait\",\"tn\":5}"] = {
-        Image = "rbxassetid://112224184101102",
-        ClassName = "Consumable"
-    },    
-    ["{\"id\":\"Crystal Key Lower Half\"}"] = {
-        Image = "rbxassetid://15000810798",
-        ClassName = "Misc"
-    },
-    ["{\"id\":\"Crystal Key Upper Half\"}"] = {
-        Image = "rbxassetid://15000810636",
-        ClassName = "Misc"
-    }
-}
+local jsonData = game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/shoppingList.json")
+local shoppingList = game:GetService("HttpService"):JSONDecode(jsonData)
 
 -- Convert To Number
 function convertToNumber(text)
@@ -86,23 +74,14 @@ for _, booth in pairs(booths:GetChildren()) do
         local owner = booth:GetAttribute("Owner")
         for _, item in pairs(booth:WaitForChild("Pets"):WaitForChild("BoothTop"):WaitForChild("PetScroll"):GetChildren()) do
             if #item:GetChildren() > 0 then
-                for i, n in shoppingList do
+                for _, n in shoppingList do
                     if #item:GetChildren() > 0 and item:WaitForChild("Holder"):WaitForChild("ItemSlot"):WaitForChild("Icon").Image == n.Image then
                         local itemCost = Instance.new("Message")
                         itemCost.Parent = game:GetService("CoreGui")
-                        itemCost.Text = item:WaitForChild("Buy"):WaitForChild("Cost").Text .. i
+                        itemCost.Text = item:WaitForChild("Buy"):WaitForChild("Cost").Text .. n.id
         
                         local cost = convertToNumber(item:WaitForChild("Buy"):WaitForChild("Cost").Text)
-                        local bestPrice = 1000
-                        local prices = readfile("bestPrice.txt")
-
-                        for _, line in ipairs(string.split(prices, "\n")) do
-                            local jsonPart, pricePart = line:match("^(%{.*%})%s+(%d+)$")
-                            if i == jsonPart then
-                                bestPrice = tonumber(pricePart)
-                                break
-                            end
-                        end
+                        local bestPrice = n.BestPrice
 
                         if cost <= bestPrice then
                             BuyItem(item, owner, cost)

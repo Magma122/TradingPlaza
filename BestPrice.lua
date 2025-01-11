@@ -21,24 +21,14 @@ function BestPrice(ClassName, StackKey)
 end
 
 -- List
-local shoppingList = {
-    ["{\"id\":\"Fishing Bait\",\"tn\":5}"] = {
-        Image = "rbxassetid://112224184101102",
-        ClassName = "Consumable"
-    },    
-    ["{\"id\":\"Crystal Key Lower Half\"}"] = {
-        Image = "rbxassetid://15000810798",
-        ClassName = "Misc"
-    },
-    ["{\"id\":\"Crystal Key Upper Half\"}"] = {
-        Image = "rbxassetid://15000810636",
-        ClassName = "Misc"
-    }
-}
+local jsonData = game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/shoppingList.json")
+local shoppingList = game:GetService("HttpService"):JSONDecode(jsonData)
 
 local lines = readfile("bestPrice.txt")
-for i, n in shoppingList do
-    local bestPrice = BestPrice(n.ClassName, i)
+for _, n in shoppingList do 
+    local table = { id = n.id, tn = n.tn}
+    local FastJSON = require(game.ReplicatedStorage.Library.Functions.FastJSON)
+    local bestPrice = BestPrice(n.ClassName, FastJSON(table))
     bestPrice = bestPrice - (bestPrice * 0.2)
     lines = lines .. i .. " " .. tostring(bestPrice) .. "\n"
 end
