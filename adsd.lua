@@ -81,7 +81,7 @@ for _, booth in pairs(booths:GetChildren()) do
                         itemCost.Text = item:WaitForChild("Buy"):WaitForChild("Cost").Text .. n.id
         
                         local cost = convertToNumber(item:WaitForChild("Buy"):WaitForChild("Cost").Text)
-                        local bestPrice = n.BestPrice
+                        local bestPrice = convertToNumber(n.BestPrice)
 
                         if cost <= bestPrice then
                             BuyItem(item, owner, cost)
