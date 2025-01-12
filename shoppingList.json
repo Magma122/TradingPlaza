@@ -21,8 +21,20 @@
     {
         "id": "Corrupted Huge Bait",
         "tn": 1,
-        "Image": "",
+        "Image": "rbxassetid://15000810798",
         "ClassName": "Consumable",
-        "BestPrice": "1000"
+        "BestPrice": "750"
+    },
+    {
+        "id": "Magma Egg",
+        "Image": "rbxassetid://15172354975",
+        "ClassName": "Egg",
+        "BestPrice": "3000"
+    },
+    {
+        "id": "Celestial Mining Chest",
+        "Image": "rbxassetid://88409953745312",
+        "ClassName": "Lootbox",
+        "BestPrice": "5000"
     }
 ]
