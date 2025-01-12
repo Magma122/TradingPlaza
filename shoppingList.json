@@ -4,13 +4,13 @@
         "tn": 5,
         "Image": "rbxassetid://112224184101102",
         "ClassName": "Consumable",
-        "BestPrice": "4500"
+        "BestPrice": "5000"
     },
     {
         "id": "Crystal Key Lower Half",
         "Image": "rbxassetid://15000810798",
         "ClassName": "Misc",
-        "BestPrice": "1000"
+        "BestPrice": "750"
     },
     {
         "id": "Crystal Key Upper Half",
