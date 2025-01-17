@@ -42,5 +42,11 @@
         "Image": "rbxassetid://14976455394",
         "ClassName": "Pet",
         "BestPrice": "3000000"
+    },
+    {
+        "id": "Runic Pickaxe",
+        "Image": "rbxassetid://88409953745312",
+        "ClassName": "Pickaxe",
+        "BestPrice": "3000000"
     }
 ]
