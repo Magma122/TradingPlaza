@@ -4,13 +4,13 @@
         "tn": 5,
         "Image": "rbxassetid://112224184101102",
         "ClassName": "Consumable",
-        "BestPrice": "5000"
+        "BestPrice": "2000"
     },
     {
         "id": "Crystal Key Lower Half",
         "Image": "rbxassetid://15000810798",
         "ClassName": "Misc",
-        "BestPrice": "750"
+        "BestPrice": "500"
     },
     {
         "id": "Crystal Key Upper Half",
@@ -23,7 +23,7 @@
         "tn": 1,
         "Image": "rbxassetid://15000810798",
         "ClassName": "Consumable",
-        "BestPrice": "750"
+        "BestPrice": "500"
     },
     {
         "id": "Magma Egg",
@@ -35,6 +35,12 @@
         "id": "Celestial Mining Chest",
         "Image": "rbxassetid://88409953745312",
         "ClassName": "Lootbox",
-        "BestPrice": "5000"
+        "BestPrice": "3000"
+    },
+    {
+        "id": "Huge Hell Rock",
+        "Image": "rbxassetid://14976455394",
+        "ClassName": "Pet",
+        "BestPrice": "3000000000"
     }
 ]
