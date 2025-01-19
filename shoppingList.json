@@ -4,7 +4,7 @@
         "tn": 5,
         "Image": "rbxassetid://112224184101102",
         "ClassName": "Consumable",
-        "BestPrice": "2000"
+        "BestPrice": "5000"
     },
     {
         "id": "Crystal Key Lower Half",
@@ -35,7 +35,7 @@
         "id": "Celestial Mining Chest",
         "Image": "rbxassetid://88409953745312",
         "ClassName": "Lootbox",
-        "BestPrice": "3000"
+        "BestPrice": "1500"
     },
     {
         "id": "Huge Hell Rock",
@@ -47,6 +47,6 @@
         "id": "Runic Pickaxe",
         "Image": "rbxassetid://127159921050348",
         "ClassName": "Pickaxe",
-        "BestPrice": "3000000"
+        "BestPrice": "500000"
     }
 ]
