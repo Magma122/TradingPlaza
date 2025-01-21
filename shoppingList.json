@@ -4,13 +4,13 @@
         "tn": 5,
         "Image": "rbxassetid://112224184101102",
         "ClassName": "Consumable",
-        "BestPrice": "6000"
+        "BestPrice": "5000"
     },
     {
         "id": "Crystal Key Lower Half",
         "Image": "rbxassetid://15000810798",
         "ClassName": "Misc",
-        "BestPrice": "250"
+        "BestPrice": "200"
     },
     {
         "id": "Crystal Key Upper Half",
@@ -23,7 +23,7 @@
         "tn": 1,
         "Image": "rbxassetid://80593297003100",
         "ClassName": "Consumable",
-        "BestPrice": "250"
+        "BestPrice": "300"
     },
     {
         "id": "Magma Egg",
@@ -47,6 +47,6 @@
         "id": "Runic Pickaxe",
         "Image": "rbxassetid://127159921050348",
         "ClassName": "Pickaxe",
-        "BestPrice": "500000"
+        "BestPrice": "1500000"
     }
 ]
