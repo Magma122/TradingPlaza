@@ -10,11 +10,11 @@ queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus 
 
 if syn and syn.queue_on_teleport then
     syn.queue_on_teleport([[
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/adsd.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
     ]])
 elseif queue_on_teleport then
     queue_on_teleport([[
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/adsd.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
     ]])
 end
 
@@ -35,7 +35,7 @@ end
 wait(5) -- Load ALL
 
 -- List
-local jsonData = game:HttpGet("https://raw.githubusercontent.com/Magma122/PetsGO/refs/heads/main/shoppingList.json")
+local jsonData = game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/shoppingList.json")
 local shoppingList = game:GetService("HttpService"):JSONDecode(jsonData)
 
 -- Convert To Number
