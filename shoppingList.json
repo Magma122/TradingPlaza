@@ -4,13 +4,13 @@
         "tn": 5,
         "Image": "rbxassetid://112224184101102",
         "ClassName": "Consumable",
-        "BestPrice": "5000"
+        "BestPrice": "6000"
     },
     {
         "id": "Crystal Key Lower Half",
         "Image": "rbxassetid://15000810798",
         "ClassName": "Misc",
-        "BestPrice": "200"
+        "BestPrice": "150"
     },
     {
         "id": "Crystal Key Upper Half",
@@ -41,12 +41,12 @@
         "id": "Huge Hell Rock",
         "Image": "rbxassetid://14976455394",
         "ClassName": "Pet",
-        "BestPrice": "4000000"
+        "BestPrice": "3500000"
     },
     {
         "id": "Runic Pickaxe",
         "Image": "rbxassetid://127159921050348",
         "ClassName": "Pickaxe",
-        "BestPrice": "1500000"
+        "BestPrice": "1000000"
     }
 ]
