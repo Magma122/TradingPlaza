@@ -23,7 +23,7 @@
         "tn": 1,
         "Image": "rbxassetid://80593297003100",
         "ClassName": "Consumable",
-        "BestPrice": "1000"
+        "BestPrice": "800"
     },
     {
         "id": "Magma Egg",
@@ -35,7 +35,7 @@
         "id": "Celestial Mining Chest",
         "Image": "rbxassetid://88409953745312",
         "ClassName": "Lootbox",
-        "BestPrice": "5000"
+        "BestPrice": "2000"
     },
     {
         "id": "Huge Hell Rock",
