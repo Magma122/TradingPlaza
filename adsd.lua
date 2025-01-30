@@ -1,4 +1,4 @@
-repeat task.wait() until game:IsLoaded()
+repeat task.wait(0.1) until game:IsLoaded()
 
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
