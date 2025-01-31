@@ -1,14 +1,7 @@
-local currentTime = os.date("%H:%M:%S %d.%m.%Y")
-print("I've been working since " .. currentTime)
+local currentTime = os.date("%H:%M:%S|%d.%m")
+print("Current Time: " .. currentTime)
 
 repeat task.wait(0.1) until game:IsLoaded()
-
-local httpService = game:GetService("HttpService")
-
-while not httpService do
-    httpService = game:GetService("HttpService")
-    wait(0.1)
-end
 
 wait(5) -- Load ALL
 
@@ -16,10 +9,20 @@ queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus 
 
 if syn and syn.queue_on_teleport then
     syn.queue_on_teleport([[
+        local httpService = game:GetService("HttpService")
+        while not httpService do
+            httpService = game:GetService("HttpService")
+            wait(0.1)
+        end
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
     ]])
 elseif queue_on_teleport then
     queue_on_teleport([[
+        local httpService = game:GetService("HttpService")
+        while not httpService do
+            httpService = game:GetService("HttpService")
+            wait(0.1)
+        end
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
     ]])
 end
