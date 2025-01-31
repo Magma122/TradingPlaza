@@ -1,5 +1,4 @@
-repeat task.wait(0.1) until game:IsLoaded()
-repeat task.wait(0.1) until game.Players.LocalPlayer
+repeat task.wait(0.1) until game:IsLoaded() and game.Players.LocalPlayer and game:GetService("HttpService")
 
 local currentTime = os.date("%H:%M:%S|%d.%m")
 print("Work|" .. currentTime)
@@ -10,24 +9,12 @@ queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus 
 
 if syn and syn.queue_on_teleport then
     syn.queue_on_teleport([[
-        repeat task.wait(0.1) until game:IsLoaded()
-        repeat task.wait(0.1) until game.Players.LocalPlayer
-        local httpService = game:GetService("HttpService")
-        while not httpService do
-            httpService = game:GetService("HttpService")
-            wait(0.1)
-        end
+        repeat task.wait(0.1) until game:IsLoaded() and game.Players.LocalPlayer and game:GetService("HttpService")
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
     ]])
 elseif queue_on_teleport then
     queue_on_teleport([[
-        repeat task.wait(0.1) until game:IsLoaded()
-        repeat wait(0.1) until game.Players.LocalPlayer
-        local httpService = game:GetService("HttpService")
-        while not httpService do
-            httpService = game:GetService("HttpService")
-            wait(0.1)
-        end
+        repeat task.wait(0.1) until game:IsLoaded() and game.Players.LocalPlayer and game:GetService("HttpService")
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
     ]])
 end
