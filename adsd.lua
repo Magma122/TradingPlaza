@@ -1,18 +1,22 @@
+local currentTime = os.date("%Y-%m-%d %H:%M:%S")
+print("Текущее время: " .. currentTime)
+print("Im Working")
+
 repeat task.wait(0.1) until game:IsLoaded()
 
 wait(5) -- Load ALL
 
--- queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
--- if syn and syn.queue_on_teleport then
---     syn.queue_on_teleport([[
---         loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
---     ]])
--- elseif queue_on_teleport then
---     queue_on_teleport([[
---         loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
---     ]])
--- end
+if syn and syn.queue_on_teleport then
+    syn.queue_on_teleport([[
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
+    ]])
+elseif queue_on_teleport then
+    queue_on_teleport([[
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
+    ]])
+end
 
 -- Load All Booths
 local booths = game:GetService("Workspace"):WaitForChild("__THINGS"):WaitForChild("Booths")
