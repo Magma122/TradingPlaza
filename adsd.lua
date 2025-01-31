@@ -1,8 +1,14 @@
-local currentTime = os.date("%Y-%m-%d %H:%M:%S")
-print("Текущее время: " .. currentTime)
-print("Im Working")
+local currentTime = os.date("%H:%M:%S %d.%m.%Y")
+print("I've been working since " .. currentTime)
 
 repeat task.wait(0.1) until game:IsLoaded()
+
+local httpService = game:GetService("HttpService")
+
+while not httpService do
+    httpService = game:GetService("HttpService")
+    wait(0.1)
+end
 
 wait(5) -- Load ALL
 
