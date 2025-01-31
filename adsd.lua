@@ -1,5 +1,7 @@
 repeat task.wait(0.1) until game:IsLoaded()
 
+wait(5) -- Load ALL
+
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
 if syn and syn.queue_on_teleport then
@@ -26,7 +28,6 @@ while #booths:GetChildren() == 0 or #booths:GetChildren() ~= pets do
         end
     end
 end
-wait(5) -- Load ALL
 
 -- List
 local jsonData = game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/shoppingList.json")
