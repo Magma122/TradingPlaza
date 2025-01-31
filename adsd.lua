@@ -1,5 +1,5 @@
 local currentTime = os.date("%H:%M:%S|%d.%m")
-print("Current Time: " .. currentTime)
+print("Work|" .. currentTime)
 
 repeat task.wait(0.1) until game:IsLoaded()
 
