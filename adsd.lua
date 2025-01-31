@@ -1,7 +1,8 @@
+repeat task.wait(0.1) until game:IsLoaded()
+repeat task.wait(0.1) until game.Players.LocalPlayer
+
 local currentTime = os.date("%H:%M:%S|%d.%m")
 print("Work|" .. currentTime)
-
-repeat task.wait(0.1) until game:IsLoaded()
 
 wait(5) -- Load ALL
 
@@ -9,6 +10,8 @@ queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus 
 
 if syn and syn.queue_on_teleport then
     syn.queue_on_teleport([[
+        repeat task.wait(0.1) until game:IsLoaded()
+        repeat task.wait(0.1) until game.Players.LocalPlayer
         local httpService = game:GetService("HttpService")
         while not httpService do
             httpService = game:GetService("HttpService")
@@ -18,6 +21,8 @@ if syn and syn.queue_on_teleport then
     ]])
 elseif queue_on_teleport then
     queue_on_teleport([[
+        repeat task.wait(0.1) until game:IsLoaded()
+        repeat wait(0.1) until game.Players.LocalPlayer
         local httpService = game:GetService("HttpService")
         while not httpService do
             httpService = game:GetService("HttpService")
