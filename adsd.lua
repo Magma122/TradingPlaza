@@ -1,9 +1,9 @@
-repeat task.wait(0.1) until game:IsLoaded() and game.Players.LocalPlayer and game:GetService("HttpService")
+repeat task.wait(1.5) until game:IsLoaded() and game.Players.LocalPlayer and game:GetService("HttpService")
 
 local currentTime = os.date("%H:%M:%S|%d.%m")
 print("Work|" .. currentTime)
 
-wait(5) -- Load ALL
+wait(4) -- Load ALL
 
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
