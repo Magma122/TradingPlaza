@@ -10,12 +10,10 @@ queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus 
 
 if syn and syn.queue_on_teleport then
     syn.queue_on_teleport([[
-        -- repeat task.wait(1.5) until game.Players.LocalPlayer and game:GetService("HttpService")
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
     ]])
 elseif queue_on_teleport then
     queue_on_teleport([[
-        -- repeat task.wait(1.5) until game.Players.LocalPlayer and game:GetService("HttpService")
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Magma122/TradingPlaza/refs/heads/main/adsd.lua"))()
     ]])
 end
