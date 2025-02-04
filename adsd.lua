@@ -4,7 +4,7 @@ game:IsLoaded()
 local currentTime = os.date("%H:%M:%S|%d.%m")
 print("Work|" .. currentTime)
 
-wait(4) -- Load ALL
+task.wait(4) -- Load ALL
 
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
